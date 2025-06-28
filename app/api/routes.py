@@ -44,7 +44,7 @@ def register(payload: TOTPCreate, db: Session = Depends(get_db), request: Reques
 
 @router.post("/verify", dependencies=[Depends(verify_api_key)], status_code=200)
 @handle_errors
-def verify(payload: TOTPVerify, db: Session = Depends(get_db), request: Request = None, dependencies=[Depends(verify_api_key)]):
+def verify(payload: TOTPVerify, db: Session = Depends(get_db), request: Request = None):
     entry = totp_repository.get_totp_secret(db, payload.username)
     if not entry:
         raise HTTPException(status_code=404, detail="User not found")
@@ -62,8 +62,6 @@ def verify(payload: TOTPVerify, db: Session = Depends(get_db), request: Request 
         ip=request.client.host
     )
     
-    totp_repository.mark_verified(db, payload.username)
-
     return {
         "message": "OTP is valid",
         "username": payload.username,
