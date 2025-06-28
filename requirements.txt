@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+pydantic
+pyotp
+qrcode[pil]
+pycryptodome
+python-dotenv
+pydantic-settings
