@@ -29,22 +29,23 @@ pip install -r requirements.txt
 ```
 
 ### 2. Configure .env
-Create a .env file in the project root:
-DATABASE_URL=sqlite:///./totp.db
-SECRET_KEY=your-32-byte-secret-key
-API_KEY=your-static-api-key
-SECRET_KEY must be exactly 32 bytes (AES-256)
+- Create a .env file in the project root:
+- DATABASE_URL=sqlite:///./totp.db
+- SECRET_KEY=your-32-byte-secret-key
+- API_KEY=your-static-api-key
+- SECRET_KEY must be exactly 32 bytes (AES-256)
 ### 3. Run the App
 ```bash
 uvicorn app.main:app --reload
 ```
-App: `http://localhost:8000`
-Docs: `http://localhost:8000/docs`
+- App: `http://localhost:8000`
+- Docs: `http://localhost:8000/docs`
 ## 📘 API Endpoints
 POST `/totp/register`
-Registers a user and returns TOTP provisioning URI + QR code (base64).
+- Registers a user and returns TOTP provisioning URI + QR code (base64).
 Headers:
 ```X-API-Key: your-static-api-key```
+
 Body:
 ```bash
 {
@@ -62,8 +63,8 @@ Response:
 }
 ```
 POST `/totp/verify`
-Verifies the OTP for a registered user.
-Headers:
+- Verifies the OTP for a registered user.
+### Headers:
 ```bash
 X-API-Key: your-static-api-key
 ```
@@ -82,17 +83,18 @@ Response:
   "status": "success"
 }
 ```
-🧾 Audit Logging
+## 🧾 Audit Logging
 Each action (register, verify) is logged with:
-Username
-Event type
-IP address
-Timestamp
-Stored in the audit_logs table.
-🔐 Authentication
-✅ API Key via X-API-Key header
-❌ JWT not yet implemented (planned)
-🧱 Folder Structure
+- Username
+- Event type
+- IP address
+- Timestamp
+- Stored in the audit_logs table.
+## 🔐 Authentication
+- ✅ API Key via X-API-Key header
+- ❌ JWT not yet implemented (planned)
+  
+## 🧱 Folder Structure
 ```bash
 app/
 ├── api/             # Routes
@@ -104,13 +106,13 @@ app/
 ├── db.py
 └── main.py
 ```
-📦 Requirements
-fastapi
-sqlalchemy
-pyotp
-pycryptodome
-qrcode
-python-dotenv
-pydantic-settings
-📜 License
+## 📦 Requirements
+- fastapi
+- sqlalchemy
+- pyotp
+- pycryptodome
+- qrcode
+- python-dotenv
+- pydantic-settings
+## 📜 License
 MIT License – Use freely, modify responsibly.
